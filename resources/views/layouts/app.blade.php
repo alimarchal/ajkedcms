@@ -13,10 +13,14 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        <link rel="icon" href="{{Storage::url('logo.png')}}">
+
         @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        @yield('custom_css')
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

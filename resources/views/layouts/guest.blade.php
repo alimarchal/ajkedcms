@@ -15,6 +15,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <link rel="icon" href="{{Storage::url('logo.png')}}">
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
