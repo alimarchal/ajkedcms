@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use mysql_xdevapi\ExecutionStatus;
 
 class User extends Authenticatable
 {
@@ -58,4 +59,39 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public static function districts(): array
+    {
+        return [
+            'Muzaffarabad',
+            'Neelum',
+            'Hattian',
+            'Poonch',
+            'Mirpur',
+            'Bagh',
+            'Bhimber',
+            'Sudhanoti',
+            'Kotli',
+            'Haveli',
+        ];
+    }
+
+    public static function office(): array
+    {
+        return [
+            'Muzaffarabad',
+            'Garhi Dupatta',
+            'Jhelum Valley',
+            'Athmuqam',
+            'Bagh',
+            'Rawalakot',
+            'Hajira',
+            'Pallandri',
+            'Kahutta_Havali',
+            'Abbaspur',
+            'Store Division Muzaffarabad',
+            'Chief Engineer Electricity',
+        ];
+    }
 }

@@ -16,6 +16,23 @@
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('complaint.index') }}" :active="request()->routeIs('complaint.*')">
+                        {{ __('Manager Complaint') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Reports') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Categories') }}
+                    </x-jet-nav-link>
+
+
+                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Manage Officers') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
@@ -142,6 +159,8 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
+
+
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

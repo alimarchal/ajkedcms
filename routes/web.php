@@ -21,5 +21,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::resource('complaint',\App\Http\Controllers\ComplaintController::class);
+
+//Route::controller(\App\Http\Controllers\ComplaintController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
+//    Route::get('/orders/{id}', 'show');
+//});
 
 
