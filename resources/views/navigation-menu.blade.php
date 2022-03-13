@@ -17,7 +17,7 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('complaint.index') }}" :active="request()->routeIs('complaint.*')">
+                    <x-jet-nav-link href="{{ route('complaint.manage') }}" :active="request()->routeIs('complaint.*')">
                         {{ __('Manager Complaint') }}
                     </x-jet-nav-link>
 
@@ -25,7 +25,7 @@
                         {{ __('Reports') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                    <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">
                         {{ __('Categories') }}
                     </x-jet-nav-link>
 

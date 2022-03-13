@@ -21,7 +21,11 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+Route::get('complaint/manage',[\App\Http\Controllers\ComplaintController::class,'manageComplaint'])->name('complaint.manage');
 Route::resource('complaint',\App\Http\Controllers\ComplaintController::class);
+Route::resource('remark',\App\Http\Controllers\RemarkController::class);
+Route::get('remark/complaint/{complaint}',[\App\Http\Controllers\RemarkController::class,'create'])->name('remark.complaint.create');
+Route::resource('category',\App\Http\Controllers\CategoryController::class);
 
 //Route::controller(\App\Http\Controllers\ComplaintController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
 //    Route::get('/orders/{id}', 'show');

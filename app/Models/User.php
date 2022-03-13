@@ -88,7 +88,7 @@ class User extends Authenticatable
             'Rawalakot',
             'Hajira',
             'Pallandri',
-            'Kahutta_Havali',
+            'Kahutta/Havali',
             'Abbaspur',
             'Store Division Muzaffarabad',
             'Chief Engineer Electricity',

@@ -46,5 +46,6 @@
         @stack('modals')
 
         @livewireScripts
+    @yield('custom_footer')
     </body>
 </html>

@@ -29,4 +29,9 @@ class Complaint extends Model
         'address',
         'status',
     ];
+
+    public function remarks()
+    {
+        return $this->hasMany(Remark::class)->orderBy('created_at', 'DESC');
+    }
 }

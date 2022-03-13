@@ -1,8 +1,7 @@
 <x-app-layout>
     @section('custom_css')
         <style>
-            .animate-charcter
-            {
+            .animate-charcter {
                 background-image: linear-gradient(
                     -225deg,
                     #231557 0%,
@@ -37,42 +36,46 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="grid grid-cols-12 gap-6">
-                <a href="#" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
+                <a href="{{route('complaint.index',['filter[status]' => 'New'])}}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
                     <div class="p-10">
                         <div class="grid grid-cols-3 gap-1">
                             <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">5</div>
+                                <div class="text-3xl font-bold leading-8">
+                                    {{\App\Models\Complaint::where('status','New')->count()}}
+                                </div>
                                 <div class="mt-1 text-base font-bold text-gray-600">New Complaints</div>
                             </div>
                             <div class="col-span-1 flex items-center justify-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                </svg>
+                                <img src="https://img.icons8.com/external-phatplus-lineal-phatplus/344/external-new-application-phatplus-lineal-phatplus.png"  class="h-12 w-12">
                             </div>
                         </div>
                     </div>
                 </a>
-                <a href="#" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
+                <a href="{{route('complaint.index',['filter[status]' => 'In Process'])}}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
                     <div class="p-10">
                         <div class="grid grid-cols-3 gap-1">
                             <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">6</div>
+                                <div class="text-3xl font-bold leading-8">
+                                    {{\App\Models\Complaint::where('status','In Process')->count()}}
+                                </div>
 
                                 <div class="mt-1 text-base  font-bold text-gray-600">In Process Complaints</div>
                             </div>
                             <div class="col-span-1 flex items-center justify-end">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7a4 4 0 11-8 0 4 4 0 018 0zM9 14a6 6 0 00-6 6v1h12v-1a6 6 0 00-6-6zM21 12h-6"></path>
-                                </svg>
+
+                                <img src="https://img.icons8.com/external-becris-flat-becris/344/external-process-franchise-business-becris-flat-becris.png" class="h-12 w-12 text-yellow-400" alt="">
+
                             </div>
                         </div>
                     </div>
                 </a>
-                <a href="#" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
+                <a href="{{route('complaint.index',['filter[status]' => 'Closed'])}}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
                     <div class="p-10">
                         <div class="grid grid-cols-3 gap-1">
                             <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">0</div>
+                                <div class="text-3xl font-bold leading-8">
+                                    {{\App\Models\Complaint::where('status','Closed')->count()}}
+                                </div>
                                 <div class="mt-1 text-base  font-bold text-gray-600">Closed Complaints</div>
                             </div>
                             <div class="col-span-1 flex items-center justify-end">
@@ -81,28 +84,29 @@
                         </div>
                     </div>
                 </a>
-                <a href="#" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
+                <a href="{{route('complaint.index')}}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
                     <div class="p-10">
                         <div class="grid grid-cols-3 gap-1">
                             <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">0</div>
+                                <div class="text-3xl font-bold leading-8">
+                                    {{\App\Models\Complaint::count()}}
+                                </div>
                                 <div class="mt-1 text-base  font-bold text-gray-600">Total Complaint</div>
                             </div>
                             <div class="col-span-1 flex items-center justify-end">
-                                <img src="https://cdn-icons-png.flaticon.com/512/914/914612.png" alt="employees on leave" class="h-12 w-12">
+                                <img src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/344/external-documents-online-survey-flatart-icons-outline-flatarticons.png" alt="employees on leave" class="h-12 w-12">
                             </div>
                         </div>
                     </div>
                 </a>
-                <a href="#" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
+                <a href="{{route('complaint.create')}}" class="transform  hover:scale-105 transition duration-300 shadow-xl rounded-lg col-span-12 sm:col-span-6 xl:col-span-6 intro-y bg-white">
                     <div class="p-10">
                         <div class="grid grid-cols-3 gap-1">
                             <div class="col-span-2">
-                                <div class="text-3xl font-bold leading-8">0</div>
-                                <div class="mt-1 text-base  font-bold text-gray-600">Create Complaint</div>
+                                <div class="mt-2 text-base  font-bold text-gray-600 ">Create New Complaint</div>
                             </div>
                             <div class="col-span-1 flex items-center justify-end">
-                                <img src="https://cdn-icons-png.flaticon.com/512/914/914612.png" alt="employees on leave" class="h-12 w-12">
+                                <img src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/344/external-documents-history-flaticons-lineal-color-flat-icons.png" alt="employees on leave" class="h-12 w-12">
                             </div>
                         </div>
                     </div>

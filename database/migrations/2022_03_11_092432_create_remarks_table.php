@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('remarks', function (Blueprint $table) {
             $table->id();
+            $table->integer('complaint_id')->nullable();
+            $table->integer('user_id')->nullable();
+            $table->text('description');
+            $table->text('file_attachments');
+            $table->enum('status',['New','In Process','Closed'])->default('New');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('remarks');
+        Schema::dropIfExists('remark');
     }
 };

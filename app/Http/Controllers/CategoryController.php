@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $category = Category::all();
+        return view('category.index',compact('category'));
     }
 
     /**
@@ -25,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -36,7 +38,14 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        if ($request->has('category_photo_url_1')) {
+            $path = $request->file('category_photo_url_1')->store('', 'public');
+            $request->merge(['category_photo_url' => $path]);
+        }
+
+        Category::create($request->all());
+        session()->flash('message', 'Category successfully created.');
+        return to_route('category.index');
     }
 
     /**
@@ -58,7 +67,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit',compact('category'));
     }
 
     /**
@@ -70,7 +79,14 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+        if ($request->has('category_photo_url_1')) {
+            $path = $request->file('category_photo_url_1')->store('', 'public');
+            $request->merge(['category_photo_url' => $path]);
+        }
+
+        $category->update($request->all());
+        session()->flash('message', 'Category successfully updated.');
+        return to_route('category.index');
     }
 
     /**
@@ -81,6 +97,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        Storage::delete('/public/'.$category->category_photo_url);
+        $category->delete();
+        session()->flash('message', 'Category successfully deleted.');
+        return to_route('category.index');
     }
 }

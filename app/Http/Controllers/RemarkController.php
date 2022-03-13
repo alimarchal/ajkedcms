@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreRemarkRequest;
 use App\Http\Requests\UpdateRemarkRequest;
+use App\Models\Complaint;
 use App\Models\Remark;
 
 class RemarkController extends Controller
@@ -23,9 +24,9 @@ class RemarkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Complaint $complaint)
     {
-        //
+        return view('remark.create',compact('complaint'));
     }
 
     /**
@@ -36,7 +37,21 @@ class RemarkController extends Controller
      */
     public function store(StoreRemarkRequest $request)
     {
-        //
+
+        if ($request->has('file_attachments_1')) {
+            $path = $request->file('file_attachments_1')->store('', 'public');
+            $request->merge(['file_attachments' => $path]);
+        }
+        $request->merge(['user_id' => auth()->user()->id]);
+        $remark = Remark::create($request->all());
+        $complaint = Complaint::find($request->complaint_id);
+        $complaint->status = $request->status;
+        $complaint->user_id = $request->user_id;
+        $complaint->update();
+
+
+        session()->flash('message', 'Remarks successfully updated.');
+        return to_route('complaint.show',[$request->complaint_id]);
     }
 
     /**
