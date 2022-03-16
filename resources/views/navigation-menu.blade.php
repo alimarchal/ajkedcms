@@ -17,22 +17,25 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('complaint.manage') }}" :active="request()->routeIs('complaint.*')">
-                        {{ __('Manager Complaint') }}
-                    </x-jet-nav-link>
+                    @can('viewdashboard')
+                        <x-jet-nav-link href="{{ route('complaint.manage') }}" :active="request()->routeIs('complaint.*')">
+                            {{ __('Manager Complaint') }}
+                        </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Reports') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
+                            {{ __('Reports') }}
+                        </x-jet-nav-link>
 
-                    <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">
-                        {{ __('Categories') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">
+                            {{ __('Categories') }}
+                        </x-jet-nav-link>
 
 
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Manage Officers') }}
-                    </x-jet-nav-link>
+                        <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.*')">
+                            {{ __('Manage Officers') }}
+                        </x-jet-nav-link>
+                    @endcan
+
                 </div>
             </div>
 

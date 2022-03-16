@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Complaint extends Model
 {
@@ -27,11 +28,25 @@ class Complaint extends Model
         'cell_number',
         'phone_number',
         'address',
+        'office',
         'status',
     ];
 
     public function remarks()
     {
         return $this->hasMany(Remark::class)->orderBy('created_at', 'DESC');
+    }
+
+    protected static function booted()
+    {
+
+        if (auth()->id() == 2) {
+            //
+        } else {
+            static::addGlobalScope('complaint', function (Builder $builder) {
+                $builder->where('user_id', auth()->id());
+            });
+        }
+
     }
 }

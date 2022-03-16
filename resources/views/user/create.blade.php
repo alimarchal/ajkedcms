@@ -30,12 +30,12 @@
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
     @endsection
     <x-slot name="header">
-        <h2 class="animate-charcter font-bold font-semibold text-xl text-gray-800 leading-tight text-center inline-block">
-            Create New Category
+        <h2 class="animate-charcter font-bold font-semibold text-xl text-gray-800 leading-tight text-center inline-block ">
+            Create New User
         </h2>
 
         <div class="flex justify-center items-center float-right">
-            <a href="{{route('category.index')}}" class="flex items-center px-4 py-2 text-gray-600 bg-white border rounded-lg
+            <a href="{{route('user.index')}}" class="flex items-center px-4 py-2 text-gray-600 bg-white border rounded-lg
             focus:outline-none hover:bg-gray-100 transition-colors duration-200 transform dark:text-gray-200
             dark:border-gray-200  dark:hover:bg-gray-700 2" title="Members List">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -43,6 +43,14 @@
                 </svg>
                 <span class="hidden md:inline-block ml-2">Back</span>
             </a>
+
+
+{{--            <a href="javascript:;" id="toggle" class="flex items-center px-4 py-2 text-gray-600 bg-white border rounded-lg focus:outline-none hover:bg-gray-100 transition-colors duration-200 transform dark:text-gray-200 dark:border-gray-200  dark:hover:bg-gray-700 ml-2" title="Members List">--}}
+{{--                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">--}}
+{{--                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>--}}
+{{--                </svg>--}}
+{{--                <span class="hidden md:inline-block ml-2">Search Filters</span>--}}
+{{--            </a>--}}
 
         </div>
     </x-slot>
@@ -54,21 +62,22 @@
                     <div class="mt-6 text-gray-500">
 
 
-                        <form action="{{route('category.store')}}" class="mb-6" method="post" enctype="multipart/form-data">
+                        <form action="{{route('user.store')}}" class="mb-6" method="post">
                             @csrf
-                            <input type="hidden" name="complaint_id" value="#">
                             <div class="bg-white rounded px-8 pt-6 pb-8 ">
+
                                 <div class="-mx-3 md:flex mb-1">
                                     <div class="w-full px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="status">
-                                            Status
+                                            Account Status
                                         </label>
                                         <select name="status" id="status" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
-                                            <option value="Active">Active</option>
-                                            <option value="InActive">In Active</option>
+                                            <option value="1">Activate</option>
+                                            <option value="0">Deactivate</option>
                                         </select>
                                     </div>
                                 </div>
+
                                 <div class="-mx-3 md:flex mb-3">
                                     <div class="w-full px-3" row="8">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="name" >
@@ -77,21 +86,59 @@
                                         <input type="text" name="name" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4">
                                     </div>
                                 </div>
-                                <div class="-mx-3 md:flex mb-1">
-                                    <div class="w-full px-3" row="8">
-                                        <label class="block uppercase resize rounded-md tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-description">
-                                            Category Description
+
+                                <div class="-mx-3 md:flex mb-3">
+                                    <div class="w-full px-3">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="name" >
+                                            Email
                                         </label>
-                                        <textarea name="description" rows="5"  class="appearance-none form-textarea w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-description"></textarea>
+                                        <input  class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" id="email" type="email" name="email" required="required">
+                                    </div>
+                                </div>
+
+                                <div class="-mx-3 md:flex mb-3">
+                                    <div class="w-full px-3">
+                                    <label class="block font-medium text-sm text-gray-700" for="password">
+                                        Password
+                                    </label>
+                                    <input class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block mt-1 w-full" id="password" type="password" name="password" required="required" autocomplete="new-password">
                                     </div>
                                 </div>
 
 
-                                <div class="md:w-1/2">
-                                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-file_attachments">
-                                        file attachments (Scanned PDF, JPG)
-                                    </label>
-                                    <input name="category_photo_url_1" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-file_attachments" type="file">
+                                <div class="-mx-3 md:flex mb-3">
+                                    <div class="w-full px-3" row="8">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="designation"  required="required">
+                                            Designation
+                                        </label>
+                                        <input type="text" name="designation" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4">
+                                    </div>
+                                </div>
+
+
+                                <div class="-mx-3 md:flex mb-3">
+                                    <div class="w-full px-3" row="8">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="contact"  required="required">
+                                            Contact
+                                        </label>
+                                        <input type="text" name="contact" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="-mx-3 md:flex mb-1">
+                                    <div class="w-full px-3">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="office">
+                                            Office
+                                        </label>
+                                        <select name="office" id="office" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
+                                            <option value="">Please select...</option>
+                                            @foreach(\App\Models\User::office() as $ofc)
+                                                <option value="{{$ofc}}">{{$ofc}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
 
                                 <div style="float: right" class="mt--1">

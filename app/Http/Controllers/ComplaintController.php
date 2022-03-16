@@ -10,6 +10,14 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ComplaintController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:viewdashboard')->only('create');
+        $this->middleware('permission:show')->only('index');
+        $this->middleware('permission:edit')->only('edit');
+        $this->middleware('permission:delete')->only('destroy');
+        $this->middleware('permission:viewdashboard')->only('manageComplaint');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +28,7 @@ class ComplaintController extends Controller
         $complaint = QueryBuilder::for(Complaint::with('remarks'))
             ->allowedFilters(['status'])
             ->paginate(10)->withQueryString();
-        
+
         return view('complaint.index_1', compact('complaint'));
     }
 

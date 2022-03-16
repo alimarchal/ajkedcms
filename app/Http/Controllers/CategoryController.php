@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:viewdashboard')->only('create');
+        $this->middleware('permission:viewdashboard')->only('index');
+        $this->middleware('permission:viewdashboard')->only('edit');
+        $this->middleware('permission:viewdashboard')->only('destroy');
+        $this->middleware('permission:viewdashboard')->only('manageComplaint');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +26,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::all();
-        return view('category.index',compact('category'));
+        return view('category.index', compact('category'));
     }
 
     /**
@@ -33,7 +42,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategoryRequest  $request
+     * @param \App\Http\Requests\StoreCategoryRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreCategoryRequest $request)
@@ -51,7 +60,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function show(Category $category)
@@ -62,19 +71,19 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
-        return view('category.edit',compact('category'));
+        return view('category.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
-     * @param  \App\Models\Category  $category
+     * @param \App\Http\Requests\UpdateCategoryRequest $request
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCategoryRequest $request, Category $category)
@@ -92,12 +101,12 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Category  $category
+     * @param \App\Models\Category $category
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category)
     {
-        Storage::delete('/public/'.$category->category_photo_url);
+        Storage::delete('/public/' . $category->category_photo_url);
         $category->delete();
         session()->flash('message', 'Category successfully deleted.');
         return to_route('category.index');

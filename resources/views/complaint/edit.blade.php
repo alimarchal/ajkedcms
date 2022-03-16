@@ -1,8 +1,7 @@
 <x-app-layout>
     @section('custom_css')
         <style>
-            .animate-charcter
-            {
+            .animate-charcter {
                 background-image: linear-gradient(
                     -225deg,
                     #231557 0%,
@@ -51,7 +50,8 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-complaint_date">
                                             complaint date
                                         </label>
-                                        <input name="complaint_date" max="{{date('Y-m-d')}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-complaint_date" type="date" value="{{$complaint->complaint_date}}">
+                                        <input name="complaint_date" max="{{date('Y-m-d')}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-complaint_date" type="date"
+                                               value="{{$complaint->complaint_date}}">
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-subject">
@@ -65,7 +65,8 @@
                                         <label class="block uppercase resize rounded-md tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-description">
                                             description
                                         </label>
-                                        <textarea name="description" rows="5"  class="appearance-none form-textarea w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-description">{{$complaint->description}}</textarea>
+                                        <textarea name="description" rows="5" class="appearance-none form-textarea w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+                                                  id="grid-description">{{$complaint->description}}</textarea>
                                     </div>
                                 </div>
                                 <div class="-mx-3 md:flex mb-1">
@@ -75,7 +76,7 @@
                                             category
                                         </label>
                                         <select name="category" id="category" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
-                                            <option value="" selected="">Please Select </option>
+                                            <option value="" selected="">Please Select</option>
                                             @foreach(\App\Models\Category::where('status', 'Active')->get() as $cat)
                                                 <option value="{{$cat->name}}" @if( $complaint->category == $cat->name) selected @endif>{{$cat->name}}</option>
                                             @endforeach
@@ -104,10 +105,10 @@
                                         block w-full bg-grey-lighter text-grey-darker
                                         border border-red rounded py-3 px-4 mb-3">
                                             <option value="" selected="">Please Select</option>
-                                            <option value="Email"  @if("Email" == $complaint->source) selected @endif>Email</option>
-                                            <option value="Fax"  @if("Fax" == $complaint->source) selected @endif>Fax</option>
-                                            <option value="Phone Call"  @if("Phone Call" == $complaint->source) selected @endif>Phone Call</option>
-                                            <option value="In Person"  @if("In Person" == $complaint->source) selected @endif>In Personl</option>
+                                            <option value="Email" @if("Email" == $complaint->source) selected @endif>Email</option>
+                                            <option value="Fax" @if("Fax" == $complaint->source) selected @endif>Fax</option>
+                                            <option value="Phone Call" @if("Phone Call" == $complaint->source) selected @endif>Phone Call</option>
+                                            <option value="In Person" @if("In Person" == $complaint->source) selected @endif>In Personl</option>
                                         </select>
                                     </div>
                                 </div>
@@ -123,7 +124,8 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-father_husband">
                                             Father/Husband Name
                                         </label>
-                                        <input name="father_husband" value="{{$complaint->father_husband}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-father_husband" type="text">
+                                        <input name="father_husband" value="{{$complaint->father_husband}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+                                               id="grid-father_husband" type="text">
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="gender">
@@ -147,24 +149,25 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-cnic">
                                             CNIC (format: xxxxx-xxxxxxx-x)
                                         </label>
-                                        <input name="cnic" value="{{$complaint->cnic}}" placeholder="XXXXX-XXXXXXX-X" maxlength="15" class="cnic_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-cnic" type="text">
+                                        <input name="cnic" value="{{$complaint->cnic}}" placeholder="XXXXX-XXXXXXX-X" maxlength="15"
+                                               class="cnic_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-cnic" type="text">
                                     </div>
 
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-cell_number">
                                             Mobile number
                                         </label>
-                                        <input name="cell_number" value="{{$complaint->cell_number}}" placeholder="0300-1234567" minlength="12" class=" number_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-cell_number" type="text" >
+                                        <input name="cell_number" value="{{$complaint->cell_number}}" placeholder="0300-1234567" minlength="12"
+                                               class=" number_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-cell_number" type="text">
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-phone_number">
                                             Phone number
                                         </label>
-                                        <input name="phone_number" value="{{$complaint->phone_number}}" placeholder="05822-920620" minlength="12" class="phone_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-phone_number" type="text" >
+                                        <input name="phone_number" value="{{$complaint->phone_number}}" placeholder="05822-920620" minlength="12"
+                                               class="phone_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-phone_number" type="text">
                                     </div>
                                 </div>
-
-
 
 
                                 <div class="-mx-3 md:flex mb-3">
@@ -176,6 +179,23 @@
                                         </label>
                                         <textarea name="address" class="appearance-none form-textarea w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-cnic">{{$complaint->phone_number}}</textarea>
                                     </div>
+
+
+                                    <div class="md:w-1/2 px-3">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="office">
+                                            Related Office
+                                        </label>
+                                        <select name="office" id="office" class="appearance-none
+                                        block w-full bg-grey-lighter text-grey-darker
+                                        border border-red rounded py-3 px-4 mb-3">
+                                            <option value="" selected="">Please Select</option>
+                                            @foreach(\App\Models\User::office() as $office)
+                                                <option value="{{$office}}" @if($complaint->office == $office) selected @endif>
+                                                    {{$office}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="gender">
                                             Complaint Mark To
@@ -183,10 +203,15 @@
                                         <select name="user_id" id="user_id" class="select2 appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" required="">
                                             <option value="" selected="">Please Select</option>
                                             @foreach(\App\Models\User::all() as $user)
-                                                <option value="{{$user->id}}" @if($complaint->user_id == $user->id) selected @endif>{{$user->name}}</option>
+                                                <option value="{{$user->id}}">{{$user->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
+
+                                </div>
+
+                                <div class="-mx-3 md:flex mb-3">
+
 
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-file_attachments">
@@ -197,9 +222,6 @@
                                     </div>
 
                                 </div>
-
-
-
                                 <div style="float: right" class="mt--1">
                                     <button class="bg-blue-500 hover:bg-blue-400
                                     text-white font-bold py-2 px-4 border-b-4
