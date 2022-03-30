@@ -24,7 +24,20 @@ class UpdateComplaintRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'complaint_date' => 'required',
+            'user_id' => 'required',
+            'subject' => 'required',
+            'description' => 'required',
+            'category' => 'required',
+            'district' => 'required',
+            'source' => 'required',
+            'name' => 'required',
+            'father_husband' => 'required',
+            'gender' => 'required',
+            'cnic' => 'required',
+            'office' => 'required',
+            'cell_number' => 'required',
+            'address' => 'required',
         ];
     }
 }

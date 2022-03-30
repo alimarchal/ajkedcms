@@ -19,13 +19,12 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [\App\Http\Controllers\Dashboard::class, 'index'])->name('dashboard');
-
-Route::get('complaint/manage', [\App\Http\Controllers\ComplaintController::class, 'manageComplaint'])->name('complaint.manage');
-Route::resource('complaint', \App\Http\Controllers\ComplaintController::class);
-Route::resource('remark', \App\Http\Controllers\RemarkController::class);
-Route::get('remark/complaint/{complaint}', [\App\Http\Controllers\RemarkController::class, 'create'])->name('remark.complaint.create');
-Route::resource('category', \App\Http\Controllers\CategoryController::class);
-Route::resource('user', \App\Http\Controllers\UserController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('complaint/manage', [\App\Http\Controllers\ComplaintController::class, 'manageComplaint'])->name('complaint.manage');
+Route::middleware(['auth:sanctum', 'verified'])->resource('complaint', \App\Http\Controllers\ComplaintController::class);
+Route::middleware(['auth:sanctum', 'verified'])->resource('remark', \App\Http\Controllers\RemarkController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('remark/complaint/{complaint}', [\App\Http\Controllers\RemarkController::class, 'create'])->name('remark.complaint.create');
+Route::middleware(['auth:sanctum', 'verified'])->resource('category', \App\Http\Controllers\CategoryController::class);
+Route::middleware(['auth:sanctum', 'verified'])->resource('user', \App\Http\Controllers\UserController::class);
 
 //Route::controller(\App\Http\Controllers\ComplaintController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
 //    Route::get('/orders/{id}', 'show');

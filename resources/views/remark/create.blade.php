@@ -40,6 +40,14 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 <div class="p-6 sm:px-10 bg-white border-b border-gray-200">
                     <div class="mt-6 text-gray-500">
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                    <strong class="font-bold">{{$error}}</strong>
+                                </div>
+                                <br>
+                            @endforeach
+                        @endif
 
 
                         <form action="{{route('remark.store')}}" class="mb-6" method="post" enctype="multipart/form-data">

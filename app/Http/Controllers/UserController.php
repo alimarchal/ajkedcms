@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\Rules\Password;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -24,6 +25,7 @@ class UserController extends Controller
     {
         return ['required', 'string'];
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -32,7 +34,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('user.index',compact('users'));
+        return view('user.index', compact('users'));
     }
 
     /**
@@ -48,7 +50,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -57,11 +59,13 @@ class UserController extends Controller
         $input = $request->toArray();
         \Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'office' => ['required'],
+            'designation' => ['required'],
+            'contact' => ['required'],
             'password' => $this->passwordRules(),
         ])->validate();
 
-        User::create(
+        $user = User::create(
             [
                 'name' => $input['name'],
                 'email' => $input['email'],
@@ -72,6 +76,8 @@ class UserController extends Controller
                 'password' => Hash::make($input['password']),
             ]
         );
+        $role2 = 'user';
+        $user->assignRole($role2);
         session()->flash('message', 'User successfully created.');
         return to_route('user.index');
     }
@@ -79,7 +85,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -90,19 +96,19 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        return view('user.edit',compact('user'));
+        return view('user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
@@ -134,7 +140,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
