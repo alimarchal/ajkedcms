@@ -27,6 +27,7 @@
                 }
             }
         </style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Nastaliq+Urdu">
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet"/>
     @endsection
     <x-slot name="header">
@@ -92,7 +93,7 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="category">
                                             category
                                         </label>
-                                        <select name="category" id="category" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
+                                        <select  style="font-family: 'Noto Nastaliq Urdu'; direction: rtl;" name="category" id="category" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
                                             <option value="" selected="">Please Select</option>
                                             @foreach(\App\Models\Category::where('status', 'Active')->get() as $cat)
                                                 <option value="{{$cat->name}}">{{$cat->name}}</option>

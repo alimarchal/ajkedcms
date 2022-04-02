@@ -27,6 +27,7 @@
                 }
             }
         </style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Nastaliq+Urdu">
     @endsection
     <x-slot name="header">
         <h2 class="animate-charcter font-bold font-semibold text-xl text-gray-800 leading-tight text-center inline-block">
@@ -54,8 +55,8 @@
                         <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th class="py-3 px-6 text-left">No</th>
                             <th class="py-3 px-6 text-left">Name</th>
-                            <th class="py-3 px-6 text-center">Description</th>
-                            <th class="py-3 px-6 text-center">category photo</th>
+{{--                            <th class="py-3 px-6 text-center">Description</th>--}}
+{{--                            <th class="py-3 px-6 text-center">category photo</th>--}}
                             <th class="py-3 px-6 text-center">status</th>
                             <th class="py-3 px-6 text-center">Action</th>
                         </tr>
@@ -73,19 +74,19 @@
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-left">
-                                        <div class="flex items-center">
+                                        <div class="flex items-center" style="font-family: 'Noto Nastaliq Urdu'; direction: rtl;">
                                             {{$cat->name}}
                                         </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">
-                                            {{$cat->description}}
-                                    </td>
+{{--                                    <td class="py-3 px-6 text-center">--}}
+{{--                                            {{$cat->description}}--}}
+{{--                                    </td>--}}
 
-                                    <td class="py-3 px-6 text-center">
-                                        <a href="{{Storage::url($cat->category_photo_url)}}" target="_blank" class="inline-flex items-center">
-                                            <img src="{{Storage::url($cat->category_photo_url)}}" alt="category_photo_url" width="50" height="50">
-                                        </a>
-                                    </td>
+{{--                                    <td class="py-3 px-6 text-center">--}}
+{{--                                        <a href="{{Storage::url($cat->category_photo_url)}}" target="_blank" class="inline-flex items-center">--}}
+{{--                                            <img src="{{Storage::url($cat->category_photo_url)}}" alt="category_photo_url" width="50" height="50">--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
 
                                     <td class="py-3 px-6 text-center">
                                         {{$cat->status}}
@@ -106,7 +107,7 @@
                             @else
 
                                 <tr class="border-b border-gray-200 hover:bg-gray-100 ">
-                                    <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <td class="py-3 px-6 text-left">
                                         <div class="flex items-center">
                                             <a href="{{route('category.edit',$cat->id)}}" class="hover:underline text-blue-500 font-bold">
                                                 {{$cat->id}}
@@ -114,20 +115,20 @@
                                         </div>
                                     </td>
                                     <td class="py-3 px-6 text-left">
-                                        <div class="flex items-center">
+                                        <div class="flex items-center" style="font-family: 'Noto Nastaliq Urdu'; direction: rtl;">
                                             {{$cat->name}}
                                         </div>
                                     </td>
-                                    <td class="py-3 px-6 text-center">
-                                        <div class="flex items-center justify-center">
-                                            {{$cat->description}}
-                                        </div>
-                                    </td>
-                                    <td class="py-3 px-6 text-center">
-                                        <a href="{{Storage::url($cat->category_photo_url)}}" target="_blank" class="inline-flex items-center">
-                                            <img src="{{Storage::url($cat->category_photo_url)}}" alt="category_photo_url" width="50" height="50">
-                                        </a>
-                                    </td>
+{{--                                    <td class="py-3 px-6 text-center">--}}
+{{--                                        <div class="flex items-center justify-center">--}}
+{{--                                            {{$cat->description}}--}}
+{{--                                        </div>--}}
+{{--                                    </td>--}}
+{{--                                    <td class="py-3 px-6 text-center">--}}
+{{--                                        <a href="{{Storage::url($cat->category_photo_url)}}" target="_blank" class="inline-flex items-center">--}}
+{{--                                            <img src="{{Storage::url($cat->category_photo_url)}}" alt="category_photo_url" width="50" height="50">--}}
+{{--                                        </a>--}}
+{{--                                    </td>--}}
                                     <td class="py-3 px-6 text-center">
                                         {{$cat->status}}
                                     </td>

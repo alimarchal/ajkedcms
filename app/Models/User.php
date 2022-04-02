@@ -96,4 +96,22 @@ class User extends Authenticatable
             'Chief Engineer Electricity',
         ];
     }
+
+    public static function office_urdu(): array
+    {
+        return [
+            'مظفرآباد',
+            'گڑھی دوپٹہ',
+            'جہلم ویلی',
+            'آٹھمقام',
+            'باغ',
+            'راولاکوٹ',
+            'ہجیرہ',
+            'پلندری',
+            'کہوٹہ/حویلی',
+            'عباسپور',
+            'سٹور دویژن مظفرآباد',
+            'چیف انجینئر برقیات',
+        ];
+    }
 }

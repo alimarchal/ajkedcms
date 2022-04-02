@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'verified'])->resource('remark', \App\Http\Co
 Route::middleware(['auth:sanctum', 'verified'])->get('remark/complaint/{complaint}', [\App\Http\Controllers\RemarkController::class, 'create'])->name('remark.complaint.create');
 Route::middleware(['auth:sanctum', 'verified'])->resource('category', \App\Http\Controllers\CategoryController::class);
 Route::middleware(['auth:sanctum', 'verified'])->resource('user', \App\Http\Controllers\UserController::class);
+Route::middleware(['auth:sanctum', 'verified'])->get('report', [\App\Http\Controllers\ReportController::class, 'index'])->name('report.index');
 
 //Route::controller(\App\Http\Controllers\ComplaintController::class)->middleware(['auth:sanctum', 'verified'])->group(function () {
 //    Route::get('/orders/{id}', 'show');
