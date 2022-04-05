@@ -135,13 +135,13 @@
 
                     </div>
 
-                    <hr>
-                    <div class="flex flex-wrap overflow-hidden">
-                        <div class="w-full overflow-hidden">
-                            <div id="chart_3"></div>
-                        </div>
+{{--                    <hr>--}}
+{{--                    <div class="flex flex-wrap overflow-hidden">--}}
+{{--                        <div class="w-full overflow-hidden">--}}
+{{--                            <div id="chart_3"></div>--}}
+{{--                        </div>--}}
 
-                    </div>
+{{--                    </div>--}}
 
 
                 </div>

@@ -1,8 +1,7 @@
 <x-app-layout>
     @section('custom_css')
         <style>
-            .animate-charcter
-            {
+            .animate-charcter {
                 background-image: linear-gradient(
                     -225deg,
                     #231557 0%,
@@ -40,7 +39,7 @@
             focus:outline-none hover:bg-gray-100 transition-colors duration-200 transform dark:text-gray-200
             dark:border-gray-200  dark:hover:bg-gray-700 2" title="Members List">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
                 </svg>
                 <span class="hidden md:inline-block ml-2">Back</span>
             </a>
@@ -70,7 +69,8 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-complaint_date">
                                             complaint date
                                         </label>
-                                        <input name="complaint_date" max="{{date('Y-m-d')}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-complaint_date" type="date" value="{{old('complaint_date')}}">
+                                        <input name="complaint_date" max="{{date('Y-m-d')}}" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-complaint_date" type="date"
+                                               value="{{old('complaint_date')}}">
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-subject">
@@ -84,7 +84,7 @@
                                         <label class="block uppercase resize rounded-md tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-description">
                                             description
                                         </label>
-                                        <textarea name="description" rows="5"  class="appearance-none form-textarea w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-description"></textarea>
+                                        <textarea name="description" rows="5" class="appearance-none form-textarea w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-description"></textarea>
                                     </div>
                                 </div>
                                 <div class="-mx-3 md:flex mb-1">
@@ -93,10 +93,14 @@
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="category">
                                             category
                                         </label>
-                                        <select  style="font-family: 'Noto Nastaliq Urdu'; direction: rtl;" name="category" id="category" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
+                                        <select style="font-family: 'Noto Nastaliq Urdu'; direction: rtl;" name="category" id="category"
+                                                class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3">
                                             <option value="" selected="">Please Select</option>
                                             @foreach(\App\Models\Category::where('status', 'Active')->get() as $cat)
-                                                <option value="{{$cat->name}}">{{$cat->name}}</option>
+                                                @if($loop->index)
+                                                    <option value="{{$cat->name}}">{{$cat->name}}</option>
+                                                @else
+                                                @endif
                                             @endforeach
                                         </select>
                                     </div>
@@ -117,8 +121,6 @@
                                     </div>
 
 
-
-
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="source">
                                             source
@@ -127,10 +129,10 @@
                                         block w-full bg-grey-lighter text-grey-darker
                                         border border-red rounded py-3 px-4 mb-3">
                                             <option value="" selected="">Please Select</option>
-                                                <option value="Email">Email</option>
-                                                <option value="Fax">Fax</option>
-                                                <option value="Phone Call">Phone Call</option>
-                                                <option value="In Person">In Personl</option>
+                                            <option value="Email">Email</option>
+                                            <option value="Fax">Fax</option>
+                                            <option value="Phone Call">Phone Call</option>
+                                            <option value="In Person">In Personl</option>
                                         </select>
                                     </div>
                                 </div>
@@ -169,30 +171,29 @@
                                 <div class="-mx-3 md:flex mb-3">
 
 
-
-
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-cnic">
                                             CNIC (format: xxxxx-xxxxxxx-x)
                                         </label>
-                                        <input name="cnic" placeholder="XXXXX-XXXXXXX-X" maxlength="15" class="cnic_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-cnic" type="text">
+                                        <input name="cnic" placeholder="XXXXX-XXXXXXX-X" maxlength="15" class="cnic_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-cnic"
+                                               type="text">
                                     </div>
 
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-cell_number">
                                             Mobile number
                                         </label>
-                                        <input name="cell_number" placeholder="0300-1234567" minlength="12" class=" number_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-cell_number" type="text" >
+                                        <input name="cell_number" placeholder="0300-1234567" minlength="12" class=" number_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                                               id="grid-cell_number" type="text">
                                     </div>
                                     <div class="md:w-1/2 px-3">
                                         <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-phone_number">
                                             Phone number
                                         </label>
-                                        <input name="phone_number" placeholder="05822-920620" minlength="12" class="phone_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-phone_number" type="text" >
+                                        <input name="phone_number" placeholder="05822-920620" minlength="12" class="phone_mask appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4"
+                                               id="grid-phone_number" type="text">
                                     </div>
                                 </div>
-
-
 
 
                                 <div class="-mx-3 md:flex mb-3">
@@ -226,7 +227,7 @@
                                         <select name="user_id" id="user_id" class="select2 appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" required="">
                                             <option value="" selected="">Please Select</option>
                                             @foreach(\App\Models\User::all() as $user)
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                                <option value="{{$user->id}}">{{$user->name}} -- ({{$user->designation}} - {{$user->office}})</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -237,12 +238,12 @@
                                 <div class="-mx-3 md:flex mb-3">
 
 
-                                <div class="md:w-1/2 px-3">
-                                    <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-file_attachments">
-                                        file attachments (Scanned PDF, JPG)
-                                    </label>
-                                    <input name="file_attachments_1" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-file_attachments" type="file">
-                                </div>
+                                    <div class="md:w-1/2 px-3">
+                                        <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2" for="grid-file_attachments">
+                                            file attachments (Scanned PDF, JPG)
+                                        </label>
+                                        <input name="file_attachments_1" class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-file_attachments" type="file">
+                                    </div>
 
                                 </div>
 
@@ -265,7 +266,7 @@
     @section('custom_footer')
         <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js" defer></script>
-            <script src="https://emis.ajk.gov.pk/assets/js/jquery.mask.js" defer></script>
+        <script src="https://emis.ajk.gov.pk/assets/js/jquery.mask.js" defer></script>
         <script>
             $(document).ready(function () {
                 $('.select2').select2();

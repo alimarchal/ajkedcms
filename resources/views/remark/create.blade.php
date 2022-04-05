@@ -73,7 +73,7 @@
                                         <select name="user_id" id="user_id" class="select2 appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" required="">
                                             <option value="" selected="">Please Select</option>
                                             @foreach(\App\Models\User::all() as $user)
-                                                <option value="{{$user->id}}">{{$user->name}}</option>
+                                                <option value="{{$user->id}}">{{$user->name}} - (Designation: {{$user->designation}} - {{$user->office}}) </option>
                                             @endforeach
                                         </select></div>
                                 </div>

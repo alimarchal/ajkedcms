@@ -42,8 +42,10 @@ class RemarkController extends Controller
             $path = $request->file('file_attachments_1')->store('', 'public');
             $request->merge(['file_attachments' => $path]);
         }
-        $request->merge(['user_id' => auth()->user()->id]);
+//        dd($request->all());
+        $request->merge(['user_id' => $request->user_id]);
         $remark = Remark::create($request->all());
+
         $complaint = Complaint::find($request->complaint_id);
         $complaint->status = $request->status;
         $complaint->user_id = $request->user_id;

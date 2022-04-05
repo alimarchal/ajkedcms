@@ -26,9 +26,9 @@
                             {{ __('Reports') }}
                         </x-jet-nav-link>
 
-                        <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">
-                            {{ __('Categories') }}
-                        </x-jet-nav-link>
+{{--                        <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">--}}
+{{--                            {{ __('Categories') }}--}}
+{{--                        </x-jet-nav-link>--}}
 
 
                         <x-jet-nav-link href="{{ route('user.index') }}" :active="request()->routeIs('user.*')">
