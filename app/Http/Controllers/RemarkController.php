@@ -26,13 +26,15 @@ class RemarkController extends Controller
      */
     public function create(Complaint $complaint)
     {
-        return view('remark.create',compact('complaint'));
+        return view('remark.create', compact('complaint'));
+
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRemarkRequest  $request
+     * @param \App\Http\Requests\StoreRemarkRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreRemarkRequest $request)
@@ -53,13 +55,18 @@ class RemarkController extends Controller
 
 
         session()->flash('message', 'Remarks successfully updated.');
-        return to_route('complaint.show',[$request->complaint_id]);
+
+        if (auth()->user()->hasRole('user')) {
+            return to_route('dashboard');
+        } else {
+            return to_route('complaint.show', [$request->complaint_id]);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Remark  $remark
+     * @param \App\Models\Remark $remark
      * @return \Illuminate\Http\Response
      */
     public function show(Remark $remark)
@@ -70,7 +77,7 @@ class RemarkController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Remark  $remark
+     * @param \App\Models\Remark $remark
      * @return \Illuminate\Http\Response
      */
     public function edit(Remark $remark)
@@ -81,8 +88,8 @@ class RemarkController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRemarkRequest  $request
-     * @param  \App\Models\Remark  $remark
+     * @param \App\Http\Requests\UpdateRemarkRequest $request
+     * @param \App\Models\Remark $remark
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateRemarkRequest $request, Remark $remark)
@@ -93,7 +100,7 @@ class RemarkController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Remark  $remark
+     * @param \App\Models\Remark $remark
      * @return \Illuminate\Http\Response
      */
     public function destroy(Remark $remark)
