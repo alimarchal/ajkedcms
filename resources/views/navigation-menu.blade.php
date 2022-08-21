@@ -26,7 +26,11 @@
                             {{ __('Reports') }}
                         </x-jet-nav-link>
 
-{{--                        <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">--}}
+                        <x-jet-nav-link href="{{ route('report.progressReport') }}" :active="request()->routeIs('report.progressReport')">
+                            {{ __('Progress Report') }}
+                        </x-jet-nav-link>
+
+                        {{--                        <x-jet-nav-link href="{{ route('category.index') }}" :active="request()->routeIs('category.*')">--}}
 {{--                            {{ __('Categories') }}--}}
 {{--                        </x-jet-nav-link>--}}
 

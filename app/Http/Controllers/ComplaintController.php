@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreComplaintRequest;
 use App\Http\Requests\UpdateComplaintRequest;
 use App\Models\Complaint;
+use App\Models\Office;
 use Illuminate\Support\Facades\Storage;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class ComplaintController extends Controller
 {
@@ -18,6 +20,7 @@ class ComplaintController extends Controller
         $this->middleware('permission:delete')->only('destroy');
         $this->middleware('permission:viewdashboard')->only('manageComplaint');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +28,12 @@ class ComplaintController extends Controller
      */
     public function index()
     {
+
         $complaint = QueryBuilder::for(Complaint::with('remarks'))
-            ->allowedFilters(['status'])
+            ->allowedFilters(['status', AllowedFilter::exact('id'),
+                AllowedFilter::exact('office'),
+                AllowedFilter::exact('category'),
+            ])
             ->paginate(10)->withQueryString();
 
         return view('complaint.index_1', compact('complaint'));
@@ -56,6 +63,11 @@ class ComplaintController extends Controller
      */
     public function store(StoreComplaintRequest $request)
     {
+
+        $office = Office::where('name', $request->office)->first();
+        if (!empty($office)) {
+            $request->merge(['office_id' => $office->id]);
+        }
 
         if ($request->has('file_attachments_1')) {
             $path = $request->file('file_attachments_1')->store('', 'public');
@@ -99,6 +111,13 @@ class ComplaintController extends Controller
      */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
+
+
+        $office = Office::where('name', $complaint->office)->first();
+        if (!empty($office)) {
+            $request->merge(['office_id' => $office->id]);
+        }
+
         if ($request->has('file_attachments_1')) {
             $path = $request->file('file_attachments_1')->store('', 'public');
             $request->merge(['file_attachments' => $path]);
