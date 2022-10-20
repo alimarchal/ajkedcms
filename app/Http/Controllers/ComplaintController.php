@@ -32,9 +32,9 @@ class ComplaintController extends Controller
         $complaint = QueryBuilder::for(Complaint::with('remarks'))
             ->allowedFilters(['status', AllowedFilter::exact('id'),
                 AllowedFilter::exact('office'),
+                AllowedFilter::exact('last_update_user_id'),
                 AllowedFilter::exact('category'),
-            ])
-            ->paginate(10)->withQueryString();
+            ])->orderBy('updated_at', 'desc')->paginate(10)->withQueryString();
 
         return view('complaint.index_1', compact('complaint'));
     }

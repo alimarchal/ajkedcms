@@ -30,6 +30,7 @@ class Complaint extends Model
         'address',
         'office',
         'status',
+        'last_update_user_id',
     ];
 
     public function remarks()

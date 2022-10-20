@@ -40,6 +40,7 @@ class RemarkController extends Controller
     public function store(StoreRemarkRequest $request)
     {
 
+
         if ($request->has('file_attachments_1')) {
             $path = $request->file('file_attachments_1')->store('', 'public');
             $request->merge(['file_attachments' => $path]);
@@ -51,6 +52,7 @@ class RemarkController extends Controller
         $complaint = Complaint::find($request->complaint_id);
         $complaint->status = $request->status;
         $complaint->user_id = $request->user_id;
+        $complaint->last_update_user_id = $remark->user_id;
         $complaint->update();
 
 

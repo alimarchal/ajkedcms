@@ -29,9 +29,39 @@
         </style>
     @endsection
     <x-slot name="header">
-        <h2 class="animate-charcter font-bold font-semibold text-xl text-gray-800 leading-tight text-center">
-            Azad Jammu & Kashmir Electricity Department - Complaint Management System
-        </h2>
+{{--        <h2 class="animate-charcter font-bold font-semibold text-xl text-gray-800 leading-tight text-center inline-block">--}}
+{{--            Azad Jammu & Kashmir Electricity Department - Complaint Management System--}}
+{{--        </h2>--}}
+
+        <form action="{{route('complaint.index')}}" method="get" class="float-right">
+
+            <select name="filter[last_update_user_id]" id="last_update_user_id" class="appearance-none
+                                        inline-block w-1/3 bg-grey-lighter text-grey-darker
+                                        border border-red rounded">
+                <option value="" selected="">Please Select</option>
+                @foreach(\App\Models\User::all() as $user)
+                    @if($user->id == 1 || $user->id == 2)
+                    @else
+                        <option value="{{$user->id}}">
+                            {{$user->name}}
+                        </option>
+                    @endif
+
+                @endforeach
+            </select>
+
+            <select name="filter[status]" id="status" class="appearance-none
+                                         inline-block w-1/3  bg-grey-lighter text-grey-darker
+                                        border border-red rounded">
+                <option value="" selected="">Please Select</option>
+                    <option value="New">New</option>
+                    <option value="In Process">In Process</option>
+                    <option value="Closed">Closed</option>
+            </select>
+
+            <input type="submit" value="Search"
+                   class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+        </form>
     </x-slot>
 
     <div class="py-12">
@@ -70,7 +100,7 @@
                                             {{$com->name}}
                                         </td>
                                         <td class="py-3 px-6 text-center">
-                                            <span class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
+                                            <span style="font-size: 10px!important;" class="bg-green-200 text-green-600 py-1 px-3 rounded-full text-xs">
                                                 {{\App\Models\User::find($com->user_id)->name}}
                                             </span>
                                         </td>
@@ -104,12 +134,14 @@
                                             </div>
                                         </td>
                                         <td class="py-3 px-6 text-center">
-                                            <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                                            <span style="font-size: 10px!important;" class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
                                                {{\App\Models\User::find($com->user_id)->name}}
                                             </span>
                                         </td>
                                         <td class="py-3 px-6 text-center">
-                                            <span class="inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">{{$com->status}}</span>
+                                            <span class="inline-flex items-center px-4 py-2 bg-red-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
+                                                {{$com->status}}
+                                            </span>
                                         </td>
                                         <td class="py-3 px-6 text-center">
                                             <div class="flex item-center justify-center">
