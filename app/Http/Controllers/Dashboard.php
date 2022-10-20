@@ -17,20 +17,6 @@ class Dashboard extends Controller
     public function index()
     {
 
-        $complaints = Complaint::all();
-        foreach($complaints as $complaint)
-        {
-            $remark = Remark::where('complaint_id',$complaint->id)->orderBy('created_at', 'desc')->first();
-            if(!empty($remark))
-            {
-                $complaint->last_update_user_id = $remark->user_id;
-                $complaint->save();
-            }
-        }
-
-
-
-        dd($remark);
 
         $list_of_office_status = [
             'Muzaffarabad' => ['New' => 0, 'In Process' => 0, 'Closed' => 0],
