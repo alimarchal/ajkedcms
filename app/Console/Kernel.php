@@ -29,7 +29,6 @@ class Kernel extends ConsoleKernel
                     ->groupBy('office', 'status')
                     ->get();
                 foreach (Office::all() as $item) {
-                    $complain_data[$item->id]['Opening Balance'] = 0;
                     $complain_data[$item->id]['New'] = 0;
                     $complain_data[$item->id]['In Process'] = 0;
                     $complain_data[$item->id]['Closed'] = 0;
@@ -38,7 +37,7 @@ class Kernel extends ConsoleKernel
                     $complain_data[$item->office_id][$item->status] = $item->total;
                 }
 
-                $complain_data_month = ComplaintData::whereMonth('created_at', date('m'))->whereYear('created_at', date('Y'))->get();
+                $complain_data_month = ComplaintData::whereDay('created_at', date('d'))->whereYear('created_at', date('Y'))->get();
 
                 if ($complain_data_month->isNotEmpty()) {
                     $ids = $complain_data_month->pluck('id')->toArray();

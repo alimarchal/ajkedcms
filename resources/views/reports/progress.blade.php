@@ -41,7 +41,7 @@
         </h2>
 
         <form action="{{route('report.progressReport')}}" method="get" class="float-right">
-            <input type="date"  name="month">
+            <input type="date" name="date">
             &nbsp;
             <input type="submit" value="Search"
                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition">
@@ -64,15 +64,13 @@
                 <h2 class="text-center font-bold">
 
                     Office of the Chief Engineer Electricity Muzaffarabad<br>
-                    Progress Report Against Complaints / Application for the Period
-                    @if(request()->has('date_range'))
-                        {{\Carbon\Carbon::parse($start_of_month)->format('d-m-Y')}} to {{\Carbon\Carbon::parse($end_of_month)->format('d-m-Y')}}
-                    @endif
+                    Progress Report Against Complaints - Reporting Date: <span class="font-bold underline">{{$today_date->format('d-m-Y')}}</span>
 
                 </h2>
 
 
                 <div class="relative overflow-x-auto shadow-md ">
+
                     <table class="w-full text-sm border-collapse border border-slate-400 text-left text-black dark:text-gray-400">
                         <thead class="text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 ">
                         <tr class="text-center">
@@ -83,45 +81,28 @@
 
 
                             <th scope="col" class="px-1 py-3 border border-black" rowspan="2">
-                                Opening Balance<br>
-                                {{$start_of_month->format('d-m-Y')}}
-                            </th>
-
-                            <th scope="col" class="px-1 py-3 border border-black" colspan="2">
-                                During the Period <br>
-                                {{$start_of_month->format('d-m-Y')}} to {{$end_of_month->format('d-m-Y')}}
-                            </th>
-
-
-                            <th scope="col" class="px-1 py-3 border border-black" rowspan="2">
-                                Closing Balance
-                            </th>
-
-
-                        </tr>
-                        <tr class="text-center">
-
-
-                            <th scope="col" class="px-1 py-3 border border-black">
                                 New Received
                             </th>
 
-                            <th scope="col" class="px-1 py-3 border border-black">
-                                Resolved
+                            <th scope="col" class="px-1 py-3 border border-black" >
+                                In Process
                             </th>
+
+                            <th scope="col" class="px-1 py-3 border border-black" rowspan="2">
+                                Closed
+                            </th>
+
 
                         </tr>
 
-
                         </thead>
+
+
+                        <h1 class=" text-center" style="margin-bottom: 10px">
+                            Printed On: <span class="font-bold underline">{{date('d-m-Y h:i:s A')}}</span></h1>
+
                         <tbody>
 
-                        @php
-                            $opening = 0;
-                            $new = 0;
-                            $resolved = 0;
-                            $closing = 0;
-                        @endphp
                         @foreach($final_data as $key => $value)
 
                             @foreach($value as $k => $v)
@@ -130,34 +111,14 @@
                                         {{$k}}
                                     </th>
                                     <th scope="row" class=" border border-black px-1 py-2 font-medium text-black dark:text-white whitespace-nowrap">
-                                        {{$v['Opening Balance']}}
+                                            {{$v['New']}}
                                     </th>
                                     <td class="px-1 py-2 border border-black ">
-                                        {{$v['New']}}
+                                        {{$v['In Process']}}
                                     </td>
                                     <td class="px-1 py-2 border border-black ">
                                         {{$v['Closed']}}
                                     </td>
-                                    <td class="px-1 py-2 border border-black ">
-                                        @if((($v['Opening Balance'] + $v['New']) - $v['Closed']) <= 0)
-                                            0
-                                        @else
-                                            {{($v['Opening Balance'] + $v['New']) - $v['Closed']}}
-                                        @endif
-
-                                    </td>
-
-                                    @php
-                                        $opening = $opening + $v['Opening Balance'];
-                                        $new = $new + $v['New'];
-                                        $resolved = $resolved + $v['Closed'];
-                                        if((($v['Opening Balance'] + $v['New']) - $v['Closed']) <= 0){
-                                             $closing = $closing + 0;
-                                        } else
-                                        {
-                                             $closing = $closing + (($v['Opening Balance'] + $v['New']) - $v['Closed']);
-                                        }
-                                    @endphp
 
                                 </tr>
                             @endforeach
@@ -166,16 +127,127 @@
 
                         <tr class="text-center font-bold">
                             <td class="px-1 py-2 border border-black">Total</td>
-                            <td class="px-1 py-2 border border-black">{{$opening}}</td>
                             <td class="px-1 py-2 border border-black">{{$new}}</td>
-                            <td class="px-1 py-2 border border-black">{{$resolved}}</td>
-                            <td class="px-1 py-2 border border-black">{{$closing}}</td>
+                            <td class="px-1 py-2 border border-black">{{$in_process}}</td>
+                            <td class="px-1 py-2 border border-black">{{$closed}}</td>
 
                         </tr>
 
 
                         </tbody>
                     </table>
+
+
+                    {{--                    <table class="w-full text-sm border-collapse border border-slate-400 text-left text-black dark:text-gray-400">--}}
+                    {{--                        <thead class="text-xs text-black uppercase bg-gray-50 dark:bg-gray-700 ">--}}
+                    {{--                        <tr class="text-center">--}}
+
+                    {{--                            <th scope="col" class="px-1 py-3 border border-black" rowspan="2">--}}
+                    {{--                                Name of office--}}
+                    {{--                            </th>--}}
+
+
+                    {{--                            <th scope="col" class="px-1 py-3 border border-black" rowspan="2">--}}
+                    {{--                                Opening Balance<br>--}}
+                    {{--                                {{$start_of_month->format('d-m-Y')}}--}}
+                    {{--                            </th>--}}
+
+                    {{--                            <th scope="col" class="px-1 py-3 border border-black" colspan="2">--}}
+                    {{--                                During the Period <br>--}}
+                    {{--                                {{$start_of_month->format('d-m-Y')}} to {{$end_of_month->format('d-m-Y')}}--}}
+                    {{--                            </th>--}}
+
+
+                    {{--                            <th scope="col" class="px-1 py-3 border border-black" rowspan="2">--}}
+                    {{--                                Closing Balance--}}
+                    {{--                            </th>--}}
+
+
+                    {{--                        </tr>--}}
+                    {{--                        <tr class="text-center">--}}
+
+
+                    {{--                            <th scope="col" class="px-1 py-3 border border-black">--}}
+                    {{--                                New Received--}}
+                    {{--                            </th>--}}
+
+                    {{--                            <th scope="col" class="px-1 py-3 border border-black">--}}
+                    {{--                                Resolved--}}
+                    {{--                            </th>--}}
+
+                    {{--                        </tr>--}}
+
+
+                    {{--                        </thead>--}}
+
+
+
+                    {{--                        <h1 class="text-3xl text-center text-red-500">--}}
+                    {{--                            Data Is not Correct ---}}
+                    {{--                            In Progress Working On This Issue Will Be Completed Soon</h1>--}}
+
+                    {{--                        <tbody>--}}
+
+                    {{--                        @php--}}
+                    {{--                            $opening = 0;--}}
+                    {{--                            $new = 0;--}}
+                    {{--                            $resolved = 0;--}}
+                    {{--                            $closing = 0;--}}
+                    {{--                        @endphp--}}
+                    {{--                        @foreach($final_data as $key => $value)--}}
+
+                    {{--                            @foreach($value as $k => $v)--}}
+                    {{--                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-black text-center">--}}
+                    {{--                                    <th scope="row" class="px-1 border border-black  py-2 font-medium text-black dark:text-white whitespace-nowrap text-left">--}}
+                    {{--                                        {{$k}}--}}
+                    {{--                                    </th>--}}
+                    {{--                                    <th scope="row" class=" border border-black px-1 py-2 font-medium text-black dark:text-white whitespace-nowrap">--}}
+                    {{--                                        {{$v['Opening Balance']}}--}}
+                    {{--                                    </th>--}}
+                    {{--                                    <td class="px-1 py-2 border border-black ">--}}
+                    {{--                                        {{$v['New']}}--}}
+                    {{--                                    </td>--}}
+                    {{--                                    <td class="px-1 py-2 border border-black ">--}}
+                    {{--                                        {{$v['Closed']}}--}}
+                    {{--                                    </td>--}}
+                    {{--                                    <td class="px-1 py-2 border border-black ">--}}
+                    {{--                                        @if((($v['Opening Balance'] + $v['New']) - $v['Closed']) <= 0)--}}
+                    {{--                                            0--}}
+                    {{--                                        @else--}}
+                    {{--                                            {{($v['Opening Balance'] + $v['New']) - $v['Closed']}}--}}
+                    {{--                                        @endif--}}
+
+                    {{--                                    </td>--}}
+
+                    {{--                                    @php--}}
+                    {{--                                        $opening = $opening + $v['Opening Balance'];--}}
+                    {{--                                        $new = $new + $v['New'];--}}
+                    {{--                                        $resolved = $resolved + $v['Closed'];--}}
+                    {{--                                        if((($v['Opening Balance'] + $v['New']) - $v['Closed']) <= 0){--}}
+                    {{--                                             $closing = $closing + 0;--}}
+                    {{--                                        } else--}}
+                    {{--                                        {--}}
+                    {{--                                             $closing = $closing + (($v['Opening Balance'] + $v['New']) - $v['Closed']);--}}
+                    {{--                                        }--}}
+                    {{--                                    @endphp--}}
+
+                    {{--                                </tr>--}}
+                    {{--                            @endforeach--}}
+
+                    {{--                        @endforeach--}}
+
+                    {{--                        <tr class="text-center font-bold">--}}
+                    {{--                            <td class="px-1 py-2 border border-black">Total</td>--}}
+                    {{--                            <td class="px-1 py-2 border border-black">{{$opening}}</td>--}}
+                    {{--                            <td class="px-1 py-2 border border-black">{{$new}}</td>--}}
+                    {{--                            <td class="px-1 py-2 border border-black">{{$resolved}}</td>--}}
+                    {{--                            <td class="px-1 py-2 border border-black">{{$closing}}</td>--}}
+
+                    {{--                        </tr>--}}
+
+
+                    {{--                        </tbody>--}}
+                    {{--                    </table>--}}
                 </div>
 
             </div>
